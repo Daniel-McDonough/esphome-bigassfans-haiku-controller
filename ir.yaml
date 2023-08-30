@@ -1,0 +1,77 @@
+esphome:
+  name: irblaster
+
+esp8266:
+  board: esp8285
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: ""
+
+ota:
+  password: ""
+
+wifi:
+  ssid: ""
+  password: ""
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Irblaster Fallback Hotspot"
+
+remote_receiver:
+  pin:
+    number: GPIO14
+    inverted: true
+  dump: all
+  
+remote_transmitter:
+  pin: GPIO4
+  carrier_duty_percent: 50%
+
+button:
+  - platform: template
+    id: fanspeedi
+    name: Fan Speed Increase
+    on_press:
+      - remote_transmitter.transmit_nec:
+          address: 0xFF00
+          command: 0xAF50
+
+  - platform: template
+    id: fanspeedd
+    name: Fan Speed Decrease
+    on_press:
+      - remote_transmitter.transmit_nec:
+          address: 0xFF00
+          command: 0xBE41
+
+  - platform: template
+    id: fanpower
+    name: Fan Power
+    on_press:
+      - remote_transmitter.transmit_nec:
+          address: 0xFF00
+          command: 0xFC03
+
+  - platform: template
+    id: fansleep
+    name: Fan Sleep
+    on_press:
+      - remote_transmitter.transmit_nec:
+          address: 0xFF00
+          command: 0xAC53
+
+  - platform: template
+    id: fantimer
+    name: Fan Timer
+    on_press:
+      - remote_transmitter.transmit_nec:
+          address: 0xFF00
+          command: 0xBF40
+
+
+captive_portal:
