@@ -22,15 +22,26 @@ wifi:
   ap:
     ssid: "Irblaster Fallback Hotspot"
 
-remote_receiver:
-  pin:
-    number: GPIO14
-    inverted: true
-  dump: all
+#This can be used to record IR pulses for different devices or as a starting point 
+#to turn this device into a receiver for HomeAssistant
+#This was used to record the IR codes and subsequently disabled.
+
+# remote_receiver:
+#   pin:
+#     number: GPIO14
+#     inverted: true
+#   dump: all
   
 remote_transmitter:
   pin: GPIO4
   carrier_duty_percent: 50%
+
+#Not all buttons are present below as some require more than just one pulse(Woosh mode and pressing woosh x3 to reverse).
+#You can easily add the other buttons by coping one of the entries below and using the NEC codes from the ir-codes.txt.
+#Light does not work on this model as there is no light.
+#The fan receiver will "sleep" a while after a button is pressed which may require you to press the speed buttons more than once.
+#This can potentailly be avoided for this model by sending the Light code before the speed transmission since the
+#light button does nothing but wake the fan.
 
 button:
   - platform: template
@@ -72,6 +83,14 @@ button:
       - remote_transmitter.transmit_nec:
           address: 0xFF00
           command: 0xBF40
+
+  - platform: template
+    id: fanclear
+    name: Fan Clear
+    on_press:
+      - remote_transmitter.transmit_nec:
+          address: 0xFF00
+          command: 0xE01F
 
 
 captive_portal:
