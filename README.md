@@ -22,6 +22,7 @@ Flashing:
 Install:
 - 5v power source
 - (Optional) USB micro/C board to power via USB
+- (Optional) Solder equipment
 - (Optional) 3D Printed case
 
 ## Installing
@@ -42,7 +43,7 @@ You need to install ESPHome via the [getting started guide](https://esphome.io/g
 
 Wire the FTDI cable accordingly to the board. The board uses 5v power so you don't need any logic or power shifters.
 
-### Install esphome terminal software:
+### Install Esphome Terminal Software:
 
 Follow the install instructions on [the esphome wiki](https://esphome.io/guides/getting_started_command_line#installation).
 
@@ -75,6 +76,7 @@ You can then add these buttons to the HomeAssistant dashboard. They are prefixed
 
 
 The case allows for one to power the board via micro-USB. The micro-USB board was purchased off Aliexpress and is 13mm wide and 14mm deep. 
+
 ![USB Micro Board](/img/usb-board.jpg)
 
 Print the top piece upside down with supports and all walls(walls = 999). If you use infill, the top of the case will not look as pretty. Print the bottom piece with the micro USB port facing up. 
